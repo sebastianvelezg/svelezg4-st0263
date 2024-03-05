@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package p2p;
+
+service FileService {
+  rpc ListFiles (ListFilesRequest) returns (ListFilesResponse) {}
+  rpc RequestFile (RequestFileRequest) returns (stream FileChunk) {}
+  rpc DiscoverFile (DiscoverFileRequest) returns (DiscoverFileResponse) {}
+  rpc ListAllFiles (ListAllFilesRequest) returns (ListAllFilesResponse) {}
+
+}
+
+message ListFilesRequest {}
+
+message ListFilesResponse {
+  repeated File files = 1;
+}
+
+message RequestFileRequest {
+  string filename = 1;
+  string fileurl = 2;
+  string username = 3;
+}
+
+message FileChunk {
+  bytes content = 1;
+}
+
+message File {
+  string filename = 1;
+  string fileurl = 2;
+}
+
+message DiscoverFileRequest {
+  string filename = 1;
+}
+
+message DiscoverFileResponse {
+  string peerAddresses = 1;
+}
+
+message ListAllFilesRequest {}
+
+message ListAllFilesResponse {
+  repeated File files = 1;
+}
+

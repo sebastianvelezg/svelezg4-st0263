@@ -1,0 +1,38 @@
+version: "3"
+services:
+  server:
+    build: ./server
+    ports:
+      - "4001:4001"
+    environment:
+      - SERVER_URL=localhost
+      - SERVER_PORT=4001
+  peer1:
+    build: ./peer
+    ports:
+      - "5001:5001"
+    environment:
+      - SERVER_URL=server
+      - SERVER_PORT=4001
+      - GRPC_URL=peer1
+      - GRPC_PORT=5001
+
+  peer2:
+    build: ./peer
+    ports:
+      - "5002:5001"
+    environment:
+      - SERVER_URL=server
+      - SERVER_PORT=4001
+      - GRPC_URL=peer2
+      - GRPC_PORT=5002
+
+  peer3:
+    build: ./peer
+    ports:
+      - "5003:5001"
+    environment:
+      - SERVER_URL=server
+      - SERVER_PORT=4001
+      - GRPC_URL=peer3
+      - GRPC_PORT=5003
