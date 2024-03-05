@@ -14,8 +14,6 @@ SERVER_PORT = os.getenv('SERVER_PORT')
 GRPC_URL = os.getenv('GRPC_URL')
 GRPC_PORT = os.getenv('GRPC_PORT')
 
-files = []
-
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -235,8 +233,8 @@ def main():
                 print(f"...| To Peer: {selected_peer['username']} |...")
                 print(f"...| {selected_peer['grpc_url']}:{selected_peer['grpc_port']} |...")
                 print("Peer Options:\n")
-                print("1. List files from peer")
-                print("2. Download file from peer")
+                print("1. List files p2p")
+                print("2. Download file p2p")
                 print("3. Upload a file")
                 print("4. Change connection")
                 print("5. Exit")
@@ -267,8 +265,8 @@ def main():
                                     peer_username, address = peer_str.split(' ', 1)
                                     grpc_url, grpc_port = address.split(':', 1)
                                     print(f"{index}. Username: {peer_username}, Address: {grpc_url}:{grpc_port}")
-
                                 peer_index = int(input("\nSelect a peer to download from by number: ")) - 1
+                                
                                 if 0 <= peer_index < len(peers_with_file):
                                     peer_str = peers_with_file[peer_index]
                                     peer_username, address = peer_str.split(' ', 1)

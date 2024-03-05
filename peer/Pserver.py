@@ -7,7 +7,7 @@ import p2p_pb2_grpc
 from concurrent import futures
 import json
 
-GRPC_PORT = os.getenv('GRPC_PORT', '50051')
+GRPC_PORT = os.getenv('GRPC_PORT')
 SERVER_URL = os.getenv('SERVER_URL')
 SERVER_PORT = os.getenv('SERVER_PORT')
 
@@ -60,8 +60,6 @@ class FileServiceImpl(p2p_pb2_grpc.FileServiceServicer):
         else:
             logging.info(f"File '{request.filename}' not found for {context.peer()}")
             context.abort(grpc.StatusCode.NOT_FOUND, "File not found")
-
-
 
     def ListAllFiles(self, request, context):
         logging.info(f"Received ListAllFiles request from {context.peer()}")
